@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apple
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: apple
+  template:
+    metadata:
+      labels:
+        app: apple
+    spec:
+      containers:
+      - name: apple
+        image: 6382king/apple-style
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: apple
+spec:
+  ports:
+  - targetPort: 80
+    port: 8500
+  selector:
+    app: apple
+  type: LoadBalancer
+  externalIPs:
+  - 167.71.231.6
